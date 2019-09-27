@@ -77,24 +77,24 @@ app.post('/postexercise',(req,res)=>{
     return res.json(Data)
 })
 // get all courses
-app.get('/getexercise', function (req, res) {
+app.get('/exercises', function (req, res) {
     fs.readFile("exercise.json", 'utf8', function (err, data) {
        console.log( data );
        return res.end( data );
     });
  })
-// //  selected exercise
-//  app.get("/getexercise/:id",function(req,res){
-//     let id = req.params.id
-//     var data = fs.readFileSync("exercise.json") 
-//     var Data = JSON.parse(data);
-//     var exercises = []
-//     for(var index in Data){
-//         if(Data[index]["courseId"]==id){
-//             exercises.push(Data[index])
-//             console.log(exercises)
-//         }
-//     }
-//     return res.send(JSON.stringify(exercises))
-//  });
+//  selected exercise
+ app.get("/courseId/:id/exercises",function(req,res){
+    let id = req.params.id
+    var data = fs.readFileSync("exercise.json") 
+    var Data = JSON.parse(data);
+    var exercises = []
+    for(var index in Data){
+        if(Data[index]["courseId"]==id){
+            exercises.push(Data[index])
+            console.log(exercises)
+        }
+    }
+    return res.send(JSON.stringify(exercises))
+ });
 app.listen(3000, () => console.log('server is listening'));
