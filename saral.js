@@ -40,15 +40,32 @@ app.get("/get/:name",function(req,res){
     }
 });
 
-app.delete("/deleteUser/:id",(req,res)=>{
-    fs.readFile("data.json", 'utf8', function (err, data) {
+// app.delete("/deleteUser/:id",(req,res)=>{
+//     fs.readFile("data.json", 'utf8', function (err, data) {
         
-        var data = JSON.parse(data);
-        delete data[req.params.id-1];
-        fs.writeFileSync("data.json", JSON.stringify(data,null,2))
-        console.log(data)
-        return res.json(data)
-   });
- })
+//         var data = JSON.parse(data);
+//         delete data[req.params.id-1];
+//         fs.writeFileSync("data.json", JSON.stringify(data,null,2))
+//         console.log(data)
+//         return res.json(data)
+//    });
+//  })
+ app.put('/put/:name',(req,res)=>{
+
+    var id = req.params.id;
+    var jsondata = fs.readFileSync('data.json')
+    var Data = JSON.parse(jsondata);
+    for (var j in Data){
+        if (Data[j]["name"]==id){
+   
+            Data[id-1]["name"] = req.body.name;
+            Data[id-1]["description"] = req.body.description;
+        
+            fs.writeFileSync("data.json", JSON.stringify(Data[j]));
+            console.log(Data[j])
+            return res.json(data)
+        }
+    }
+ }),
  
 app.listen(3000, () => console.log('server is listening'));
