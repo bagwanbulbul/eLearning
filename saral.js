@@ -21,4 +21,10 @@ app.post('/post',(req,res)=>{
     fs.writeFileSync("data.json",JSON.stringify(Data,null,2))
     return res.json(Data)
 })
+app.get('/get', function (req, res) {
+    fs.readFile("data.json", 'utf8', function (err, data) {
+       console.log( data );
+       return res.end( data );
+    });
+ })
 app.listen(3000, () => console.log('server is listening'));
