@@ -38,21 +38,19 @@ app.get('/get', function (req, res) {
         }
     }
  });
- app.put('/put/:name',(req,res)=>{
+ app.put('/put/:id',(req,res)=>{
 
-    var id = req.params.id;
+    var id = req.params.id-1;
     var jsondata = fs.readFileSync('data.json')
     var Data = JSON.parse(jsondata);
-    for (var j in Data){
-        if (Data[j]["name"]==id){
-   
-            Data[id-1]["name"] = req.body.name;
-            Data[id-1]["description"] = req.body.description;
-        
-            fs.writeFileSync("data.json", JSON.stringify(Data[j]));
-            console.log(Data[j])
-            return res.json(data)
-        }
-    }
+
+    Data[id]["name"] = req.body.name;
+    Data[id]["description"] = req.body.description;
+
+    fs.writeFileSync("data.json", JSON.stringify(Data));
+    console.log(Data)
+    return res.json(Data)
+    
+    
  }),
 app.listen(3000, () => console.log('server is listening'));
