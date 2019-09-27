@@ -27,4 +27,15 @@ app.get('/get', function (req, res) {
        return res.end( data );
     });
  })
+ app.get("/get/:name",function(req,res){
+    let id = req.params.name
+    var data = fs.readFileSync("data.json") 
+    var Data = JSON.parse(data);
+    for(var index in Data){
+        if(Data[index]["name"]==id){
+            console.log(Data[index])
+            return res.send(JSON.stringify(Data[index]))
+        }
+    }
+ });
 app.listen(3000, () => console.log('server is listening'));
