@@ -1,1 +1,52 @@
-[null,{"id":2,"name":"computer"},null,{"name":"DCA","description":"we will learn DCA","id":4},{"name":"pgdca","description":"we will learn basic computer","id":5},{"name":"pgdca","id":6,"description":"we will learn basic computer"}]
+[
+  {
+    "name": "DCA",
+    "description": "we will learn DCA",
+    "id": 1
+  },
+  {
+    "name": "PDCA",
+    "description": "we will learn PDCA",
+    "id": 2
+  },
+  {
+    "name": "data science",
+    "description": "we will learn data science",
+    "id": 3
+  },
+  {
+    "name": "c++",
+    "description": "we will learn c++",
+    "id": 4
+  },
+  {
+    "name": "java",
+    "description": "we will learn java",
+    "id": 5
+  },
+  {
+    "name": "javascript",
+    "description": "we will learn javascript",
+    "id": 6
+  },
+  {
+    "name": "node js",
+    "description": "we will learn node js",
+    "id": 7
+  },
+  {
+    "name": "mongoDb",
+    "description": "we will learn mongoDb",
+    "id": 8
+  },
+  {
+    "name": "angular",
+    "description": "we will learn angular",
+    "id": 9
+  },
+  {
+    "name": "panda",
+    "description": "we will learn panda",
+    "id": 10
+  }
+]
