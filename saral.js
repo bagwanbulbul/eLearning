@@ -83,8 +83,8 @@ app.get('/exercises', function (req, res) {
        return res.end( data );
     });
  })
-//  selected exercise
- app.get("/courseId/:id/exercises",function(req,res){
+//  selected course exercise
+ app.get("/course/:cId/exercises",function(req,res){
     let id = req.params.id
     var data = fs.readFileSync("exercise.json") 
     var Data = JSON.parse(data);
@@ -97,4 +97,23 @@ app.get('/exercises', function (req, res) {
     }
     return res.send(JSON.stringify(exercises))
  });
+//  selected exercise
+app.get("/course/:cId/exercises/:eId",function(req,res){
+    let id = req.params.cId
+    var data = fs.readFileSync("exercise.json")
+    var Data = JSON.parse(data);
+    console.log(Data)
+    for(var index in Data){
+        if(Data[index]["courseId"]==id){
+            var eId = req.params.eId
+            for (var j in Data){
+                if (Data[j]["id"]==eId && Data[j]["courseId"]==id){
+                    res.json(JSON.stringify(Data[j]))
+                }
+                
+            }
+        }
+    }
+    res.end("data is not found")
+})
 app.listen(3000, () => console.log('server is listening'));
