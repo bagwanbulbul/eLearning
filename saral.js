@@ -10,7 +10,7 @@ app.post('/post',(req,res)=>{
         name:req.body.name,
         description:req.body.description
     }
-    var data =fs.readFileSync("data.json")
+    var data =fs.readFileSync("courses.json")
     console.log(data)
     data = data.toString();
     let Data = JSON.parse(data)
@@ -18,12 +18,12 @@ app.post('/post',(req,res)=>{
     user1["id"] = id+1;
     console.log(user1);
     Data.push(user1)
-    fs.writeFileSync("data.json",JSON.stringify(Data,null,2))
+    fs.writeFileSync("courses.json",JSON.stringify(Data,null,2))
     return res.json(Data)
 })
 // get all courses
 app.get('/get', function (req, res) {
-    fs.readFile("data.json", 'utf8', function (err, data) {
+    fs.readFile("courses.json", 'utf8', function (err, data) {
        console.log( data );
        return res.end( data );
     });
@@ -31,7 +31,7 @@ app.get('/get', function (req, res) {
 //  selected courses
  app.get("/get/:name",function(req,res){
     let id = req.params.name
-    var data = fs.readFileSync("data.json") 
+    var data = fs.readFileSync("courses.json") 
     var Data = JSON.parse(data);
     for(var index in Data){
         if(Data[index]["name"]==id){
@@ -44,13 +44,13 @@ app.get('/get', function (req, res) {
  app.put('/put/:id',(req,res)=>{
 
     var id = req.params.id-1;
-    var jsondata = fs.readFileSync('data.json')
+    var jsondata = fs.readFileSync('courses.json')
     var Data = JSON.parse(jsondata);
 
     Data[id]["name"] = req.body.name;
     Data[id]["description"] = req.body.description;
 
-    fs.writeFileSync("data.json", JSON.stringify(Data));
+    fs.writeFileSync("courses.json", JSON.stringify(Data));
     console.log(Data)
     return res.json(Data)
 }),
@@ -148,7 +148,6 @@ app.post("/submissionPost/:cId/exercise/:eId",function(req,res){
     var exerciseUser = {
         code:req.body.code,
         userName:req.body.userName
-        
     }
     var data = fs.readFileSync("submition.json")
     data = data.toString();
@@ -159,6 +158,5 @@ app.post("/submissionPost/:cId/exercise/:eId",function(req,res){
     Data.push(exerciseUser)
     fs.writeFileSync("submition.json", JSON.stringify(Data,null,2))
     return res.json(Data)
-
 })
 app.listen(3000, () => console.log('server is listening 3000....'));
