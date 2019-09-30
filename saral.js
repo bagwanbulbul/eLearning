@@ -159,4 +159,17 @@ app.post("/submissionPost/:cId/exercise/:eId",function(req,res){
     fs.writeFileSync("submition.json", JSON.stringify(Data,null,2))
     return res.json(Data)
 })
+// get submition 
+app.get("/get/course/:cId/exercise/:eId",function(req,res){
+    let cId = req.params.cId
+    let eId = req.params.eId
+    var data = fs.readFileSync("submition.json") 
+    var Data = JSON.parse(data);
+    for(var index in Data){
+        if(Data[index]["courseId"]==cId && Data[index]["exerciseId"]==eId){
+            console.log(Data[index])
+            return res.send(JSON.stringify(Data[index]))
+        }
+    }
+ });
 app.listen(3000, () => console.log('server is listening 3000....'));
