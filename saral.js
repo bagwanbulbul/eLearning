@@ -108,7 +108,7 @@ app.get("/course/:cId/exercises/:eId",function(req,res){
             var eId = req.params.eId
             for (var j in Data){
                 if (Data[j]["id"]==eId && Data[j]["courseId"]==id){
-                    res.json(JSON.stringify(Data[j]))
+                    res.send(JSON.stringify(Data[j]))
                 }
                 
             }
@@ -116,4 +116,30 @@ app.get("/course/:cId/exercises/:eId",function(req,res){
     }
     res.end("data is not found")
 })
-app.listen(3000, () => console.log('server is listening'));
+// update exercise
+app.put('/put/:cId/exercise/:eId',(req,res)=>{
+
+    var cId = req.params.cId;
+    var jsondata = fs.readFileSync('exercise.json')
+    var Data = JSON.parse(jsondata);
+
+    for(var index in Data){
+        if(Data[index]["courseId"]==cId){
+            var eId = req.params.eId-1
+            for (var j in Data){
+                if (Data[j]["id"]==eId && Data[j]["courseId"]==cId){
+                    Data[j]["name"] = req.body.name;
+                    Data[j]["description"] = req.body.description;
+                    Data[j]["content"]=req.body.content;
+                    Data[j]["hint"]=req.body.hint;
+                    fs.writeFileSync("exercise.json", JSON.stringify(Data,null,2));
+
+                    res.send(Data)
+                }
+                
+            }
+        }
+    }
+});
+
+app.listen(3000, () => console.log('server is listening 3000....'));
