@@ -141,5 +141,24 @@ app.put('/put/:cId/exercise/:eId',(req,res)=>{
         }
     }
 });
+// sumition
+app.post("/submissionPost/:cId/exercise/:eId",function(req,res){
+    var cId = req.params.cId; 
+    var eId = req.params.eId
+    var exerciseUser = {
+        code:req.body.code,
+        userName:req.body.userName
+        
+    }
+    var data = fs.readFileSync("submition.json")
+    data = data.toString();
+    var Data = JSON.parse(data)
+    exerciseUser.submitionId = Data.length + 1;
+    exerciseUser["courseId"] = parseInt(cId)
+    exerciseUser["exerciseId"] = parseInt(eId)
+    Data.push(exerciseUser)
+    fs.writeFileSync("submition.json", JSON.stringify(Data,null,2))
+    return res.json(Data)
 
+})
 app.listen(3000, () => console.log('server is listening 3000....'));
